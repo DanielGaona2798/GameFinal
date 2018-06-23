@@ -1,127 +1,58 @@
 package models;
 
+import java.awt.Rectangle;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import constants.ConstatntsUI;
 import controller.Controller;
-import views.ChatWindow;
 
 public class Client extends Connection{
 
-	private int id;
-	private String name;
-	private int pasword;
-	private int state;
 	private Controller controller;
-	private int lives;
-	private int points;
+	private String name;
+	private ArrayList<Player> players;
 	
-	public Client(String name, int pasword, String ip, int port,Controller controller) throws IOException {
+	public Client(String name, String ip, int port,Controller controller) throws IOException {
 		super(ip, port);
 		this.name = name;
-		this.setPasword(pasword);
 		this.controller = controller;
-		this.lives = 3;
-		this.points = 0;
+		players = new ArrayList<>();
 	}
 
 	@Override
 	void executeTask() {
-		try {
-			String[] path = readResponse().split("#");
-			switch (path[0]) {
-			case "/registro":
-				break;
-			case "/segunda":
-				break;
-			case "/connect":
-				if (path[1].equals("1")) {
-					controller.showChatWindow();
-				} else {
-					ChatWindow.impMesagge();
+			String[] path;
+			try {
+				path = readResponse().split("#");
+				switch (path[0]) {
+				case ConstatntsUI.SEND_ALL:
+					getPLayerList(path[1]);
+					break;
 				}
-				state = Integer.parseInt(path[1]);
-				break;
-			case "/tengaLista":
-				putListClient(path);
-				break;
-			case "/send":
-				break;
-			case "/deseaJugar":
-				send("/acceptacion#" + ChatWindow.showConfirmDialog(path[1] + " desea jugar contigo.") + "#" + path[1] + "#" + controller.getheithWindow() + "#" + controller.getWithWindow());
-				break;
-			case "/paila":
-				ChatWindow.showMsg("paila mijo no quieren jugar con tigo");
-				break;
-			case "/generateWall":
-				controller.setWallList(path[1]);
-				break;
-			case "/generateBomb":
-				controller.setBombList(path[1]);
-				controller.showPanel();
-				break;
-			case "/setPointFriend":
-				controller.updatePonint(path[1]);
-				break;
-			case "/updateFiury":
-				controller.updateFiury(path[1]);
-				controller.updateLantern(path[2]);
-				break;
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		} catch (IOException e) {
+
+		}
+
+	public void getPLayerList(String a){
+		players = new ArrayList<>();
+		String[] players2 = a.split(",");
+		for (int i = 0; i < players2.length; i++) {
+			String string2 = players2[i];
+			String[] as = string2.split("!");
+			players.add(new Player(as[0], new Rectangle(Integer.parseInt(as[1]),Integer.parseInt(as[2]), 20, 20)));
 		}
 	}
-
-	private void putListClient(String[] path) {
-		ArrayList<String> users = new ArrayList<>();
-		for (int i = 1; i < path.length; i++) {
-			users.add(path[i]);
-		}
-		controller.putListClient(users);
-	}
-
-
-	public int getId() {
-		return id;
-	}
-
-
+	
 	public String getName() {
 		return name;
 	}
 
-
-	public int getPasword() {
-		return pasword;
-	}
-
-
-	public void setPasword(int pasword) {
-		this.pasword = pasword;
-	}
-
-
-	public int getState() {
-		return state;
-	}
-
-
-	public void setState(int state) {
-		this.state = state;
+	public ArrayList<Player> getPlayers() {
+		return players;
 	}
 	
 	
-	public int getLives() {
-		return lives;
-	}
-
-
-	public int getPoints() {
-		return points;
-	}
-
-	public void resetDatasLiveAndPoints(){
-		this.lives = 3;
-		this.points = 0;
-	}
 }
