@@ -1,7 +1,6 @@
 package models;
 
 import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
 
 
 public class Player {
@@ -38,6 +37,10 @@ public class Player {
 
 	public void rigth() {
 		rectangle.setLocation(rectangle.x+20, rectangle.y);
+	}
+
+	public void moveInitPosition() {
+		rectangle.setLocation(0, 10);
 	}
 	
 }

@@ -4,8 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
+import constants.ConstatntsUI;
 import controller.Controller;
 import models.Player;
 
@@ -23,6 +25,9 @@ public class MainWindow extends JFrame{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		drawing = new PanelDrawing(controller);
 		add(drawing, BorderLayout.CENTER);
+		
+		setTitle(ConstatntsUI.GAMETITLE);
+		setIconImage(new ImageIcon(getClass().getResource("/img/icon.png")).getImage());
 		setVisible(true);
 	
 		

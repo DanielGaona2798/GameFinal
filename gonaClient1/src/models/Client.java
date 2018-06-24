@@ -49,6 +49,7 @@ public class Client extends Connection{
 		}
 
 	private void getWalls(String string) {
+		rectangleWall = new ArrayList<>();
 		String[] request = string.split(",");
 		for (int i = 0; i < request.length; i++) {
 			String string2 = request[i];
