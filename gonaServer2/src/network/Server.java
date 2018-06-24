@@ -124,19 +124,36 @@ public class Server {
 				case KeyEvent.VK_RIGHT:
 					player.rigth();
 					coalitionWallR(player);
+					coalitionPoint(player);
 					break;
 				case KeyEvent.VK_LEFT:
 					player.left();
 					coalitionWallLE(player);
+					coalitionPoint(player);
 					break;
 				case KeyEvent.VK_UP:
 					player.up();
 					coalitionWallU(player);
+					coalitionPoint(player);
 					break;
 				case KeyEvent.VK_DOWN:
 					player.down();
 					coalitionWallD(player);
+					coalitionPoint(player);
 					break;
+				}
+			}
+		}
+	}
+
+	private static void coalitionPoint(Player player) {
+		if (player.getRectangle().intersects(finalPoint)) {
+			for (ClientConnections clientConnections2 : clientConnections) {
+				try {
+					clientConnections2.send(ConstatntsUI.FINISH_GAME+ player.getName());
+					clientConnections2.close();
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
 			}
 		}

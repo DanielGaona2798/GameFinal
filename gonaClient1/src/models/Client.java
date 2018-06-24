@@ -38,6 +38,9 @@ public class Client extends Connection{
 				case ConstatntsUI.SEND_WALL:
 					getWalls(path[1]);
 					break;
+				case ConstatntsUI.FINISH_GAME:
+					controller.finish(path[1]);
+					break;
 				}
 			} catch (IOException e) {
 				e.printStackTrace();

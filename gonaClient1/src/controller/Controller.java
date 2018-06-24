@@ -20,7 +20,7 @@ public class Controller implements ActionListener, KeyListener{
 	private Client client;
 	private MainWindow mainWindow;
 	private Timer timer;
-	
+
 	public Controller() {
 		try {
 			client = new Client(JOptionPane.showInputDialog("Name"), JOptionPane.showInputDialog("IP"),Integer.parseInt(JOptionPane.showInputDialog("Port")), this);
@@ -30,24 +30,26 @@ public class Controller implements ActionListener, KeyListener{
 		}
 		mainWindow = new MainWindow(this);
 		timer = new Timer(10, new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				actualizeView();
 			}
+
 		});
 		timer.start();
+
 	}
-	
+
 	@Override
 	public void keyTyped(KeyEvent e) {
-		
+
 	}
 
 	public void actualizeView(){
 		mainWindow.setView(client.getPlayers(),client.getPoint(),client.getRectangleWall());
 	}
-	
+
 	@Override
 	public void keyPressed(KeyEvent e) {
 		try {
@@ -63,9 +65,14 @@ public class Controller implements ActionListener, KeyListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 	}
 	public static void main(String[] args) {
 		new Controller();
+	}
+
+	public void finish(String string) {
+		JOptionPane.showMessageDialog(null,"El ganador es"+ string);
+		System.exit(0);
 	}
 }
