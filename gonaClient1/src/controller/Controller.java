@@ -45,7 +45,7 @@ public class Controller implements ActionListener, KeyListener{
 	}
 
 	public void actualizeView(){
-		mainWindow.setView(client.getPlayers());
+		mainWindow.setView(client.getPlayers(),client.getPoint(),client.getRectangleWall());
 	}
 	
 	@Override

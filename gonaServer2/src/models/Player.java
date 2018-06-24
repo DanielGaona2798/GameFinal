@@ -22,36 +22,21 @@ public class Player {
 		return rectangle;
 	}
 
-	public void move(int code) {
-		switch (code) {
-		case KeyEvent.VK_RIGHT:
-			rigth();
-			break;
-		case KeyEvent.VK_LEFT:
-			left();
-			break;
-		case KeyEvent.VK_UP:
-			up();
-			break;
-		case KeyEvent.VK_DOWN:
-			down();
-			break;
-		}
-	}
+	
 
-	private void down() {
+	public void down() {
 		rectangle.setLocation(rectangle.x, rectangle.y+20);
 	}
 
-	private void up() {
+	public void up() {
 		rectangle.setLocation(rectangle.x, rectangle.y-20);		
 	}
 
-	private void left() {
+	public void left() {
 		rectangle.setLocation(rectangle.x-20, rectangle.y);
 	}
 
-	private void rigth() {
+	public void rigth() {
 		rectangle.setLocation(rectangle.x+20, rectangle.y);
 	}
 	

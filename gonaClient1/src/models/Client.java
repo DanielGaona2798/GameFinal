@@ -12,12 +12,15 @@ public class Client extends Connection{
 	private Controller controller;
 	private String name;
 	private ArrayList<Player> players;
+	private Rectangle point;
+	private ArrayList<Rectangle> rectangleWall;
 	
 	public Client(String name, String ip, int port,Controller controller) throws IOException {
 		super(ip, port);
 		this.name = name;
 		this.controller = controller;
 		players = new ArrayList<>();
+		rectangleWall = new ArrayList<>();
 	}
 
 	@Override
@@ -29,12 +32,32 @@ public class Client extends Connection{
 				case ConstatntsUI.SEND_ALL:
 					getPLayerList(path[1]);
 					break;
+				case ConstatntsUI.SEND_POINT_FINAL:
+					getPoint(path[1]);
+					break;
+				case ConstatntsUI.SEND_WALL:
+					getWalls(path[1]);
+					break;
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 
 		}
+
+	private void getWalls(String string) {
+		String[] request = string.split(",");
+		for (int i = 0; i < request.length; i++) {
+			String string2 = request[i];
+			String[] as = string2.split("!");
+			rectangleWall.add(new Rectangle(Integer.parseInt(as[0]), Integer.parseInt(as[1]), 30, 30));
+		}
+	}
+
+	private void getPoint(String string) {
+		String[] a = string.split("!");
+		point = new Rectangle(Integer.parseInt(a[0]), Integer.parseInt(a[1]), 50, 50);
+	}
 
 	public void getPLayerList(String a){
 		players = new ArrayList<>();
@@ -52,6 +75,14 @@ public class Client extends Connection{
 
 	public ArrayList<Player> getPlayers() {
 		return players;
+	}
+
+	public Rectangle getPoint() {
+		return point;
+	}
+
+	public ArrayList<Rectangle> getRectangleWall() {
+		return rectangleWall;
 	}
 	
 	

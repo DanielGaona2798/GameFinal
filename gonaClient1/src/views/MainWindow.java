@@ -1,6 +1,7 @@
 package views;
 
 import java.awt.BorderLayout;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -27,7 +28,7 @@ public class MainWindow extends JFrame{
 		
 	}
 
-	public void setView(ArrayList<Player> players) {
-		drawing.aiuda(players);
+	public void setView(ArrayList<Player> players, Rectangle rectangle, ArrayList<Rectangle> arrayList) {
+		drawing.aiuda(players,rectangle,arrayList);
 	}
 }

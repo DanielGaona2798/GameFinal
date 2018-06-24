@@ -25,6 +25,8 @@ public class ClientConnections extends Connection{
 			case ConstatntsUI.INIT_MESSAGE:
 				Server.addPLayer(new Player(path[1], new Rectangle(10, 10, 20, 20)));
 				Server.sendPlayers();
+				Server.sendPointFinal();
+				Server.createMap();
 				break;
 			case ConstatntsUI.MOVE:
 				Server.move(path[2],Integer.parseInt(path[1]));
