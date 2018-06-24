@@ -1,6 +1,3 @@
-/constants/
-/controller/
-/lib/
-/models/
 /views/
-/img/
+/controller/
+/constants/

@@ -27,6 +27,7 @@ public class Server {
 		clientConnections = new ArrayList<>();
 		serverSocket = new ServerSocket(Integer.parseInt(JOptionPane.showInputDialog("Port")));
 		game = new Game();
+		game.createMap();
 		timer = new Timer(100, new ActionListener() {
 			
 			@Override
@@ -50,7 +51,7 @@ public class Server {
 						Socket newConnection = serverSocket.accept();
 						System.out.println("aceptado");
 						clientConnections.add(new ClientConnections(newConnection));
-						
+						sendPointFinal();
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -64,7 +65,6 @@ public class Server {
 	}
 	
 	public static void createMap(){
-		game.createMap();
 		timer.start();
 	}
 	
@@ -145,7 +145,6 @@ public class Server {
 			for (ClientConnections clientConnections2 : clientConnections) {
 				try {
 					clientConnections2.send(ConstatntsUI.FINISH_GAME+ player.getName());
-					clientConnections2.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

@@ -28,9 +28,6 @@ public class MainWindow extends JFrame{
 		
 		setTitle(ConstatntsUI.GAMETITLE);
 		setIconImage(new ImageIcon(getClass().getResource("/img/icon.png")).getImage());
-		setVisible(true);
-	
-		
 	}
 
 	public void setView(ArrayList<Player> players, Rectangle rectangle, ArrayList<Rectangle> arrayList) {

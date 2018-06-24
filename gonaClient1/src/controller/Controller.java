@@ -1,6 +1,5 @@
 package controller;
 
-import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -13,6 +12,7 @@ import javax.swing.Timer;
 import constants.ConstatntsUI;
 import models.Client;
 import views.DialogRegsitry;
+import views.LobbyWindow;
 import views.MainWindow;
 
 
@@ -22,8 +22,10 @@ public class Controller implements ActionListener, KeyListener{
 	private MainWindow mainWindow;
 	private Timer timer;
 	private DialogRegsitry dialogRegsitry;
+	private LobbyWindow lobbyWindow;
 	
 	public Controller() {
+		lobbyWindow = new LobbyWindow(this);
 		dialogRegsitry = new DialogRegsitry(this);
 		dialogRegsitry.setVisible(true);
 		mainWindow = new MainWindow(this);
@@ -64,13 +66,20 @@ public class Controller implements ActionListener, KeyListener{
 	public void actionPerformed(ActionEvent e) {
 		switch (Actions.valueOf(e.getActionCommand()))  {
 		case ACCEPT:
+			dialogRegsitry.setVisible(false);
 			try {
 				client = new Client(dialogRegsitry.getName(), dialogRegsitry.getIP(),Integer.parseInt(dialogRegsitry.getPas()), this);
 				client.send(ConstatntsUI.INIT_MESSAGE+ client.getName());
-			} catch (HeadlessException | NumberFormatException | IOException e1) {
-				e1.printStackTrace();
+			} catch (NumberFormatException | IOException e2) {
+				e2.printStackTrace();
 			}
+			lobbyWindow.refreshTable(client.getPlayers());
+			lobbyWindow.setVisible(true);
+			break;
+		case START:
 			timer.start();
+			lobbyWindow.setVisible(false);
+			mainWindow.setVisible(true);
 			break;
 		default:
 			break;
@@ -82,7 +91,8 @@ public class Controller implements ActionListener, KeyListener{
 	}
 
 	public void finish(String string) {
-		JOptionPane.showMessageDialog(null,"El ganador es"+ string);
-		System.exit(0);
+		JOptionPane.showMessageDialog(null,"El ganador es: "+ string);
+		mainWindow.setVisible(false);
+		lobbyWindow.setVisible(true);
 	}
 }

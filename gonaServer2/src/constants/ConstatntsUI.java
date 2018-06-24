@@ -8,4 +8,5 @@ public class ConstatntsUI {
 	public static final String SEND_POINT_FINAL = "/point#";
 	public static final String SEND_WALL = "/wall#";
 	public static final String FINISH_GAME = "/finish#";
+	public static final String GET_LIST = "/lsit";
 }
