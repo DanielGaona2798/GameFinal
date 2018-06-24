@@ -12,6 +12,7 @@ import javax.swing.Timer;
 
 import constants.ConstatntsUI;
 import models.Client;
+import views.DialogRegsitry;
 import views.MainWindow;
 
 
@@ -20,14 +21,11 @@ public class Controller implements ActionListener, KeyListener{
 	private Client client;
 	private MainWindow mainWindow;
 	private Timer timer;
-
+	private DialogRegsitry dialogRegsitry;
+	
 	public Controller() {
-		try {
-			client = new Client(JOptionPane.showInputDialog("Name"), JOptionPane.showInputDialog("IP"),Integer.parseInt(JOptionPane.showInputDialog("Port")), this);
-			client.send(ConstatntsUI.INIT_MESSAGE+ client.getName());
-		} catch (HeadlessException | NumberFormatException | IOException e) {
-			e.printStackTrace();
-		}
+		dialogRegsitry = new DialogRegsitry(this);
+		dialogRegsitry.setVisible(true);
 		mainWindow = new MainWindow(this);
 		timer = new Timer(10, new ActionListener() {
 
@@ -37,7 +35,6 @@ public class Controller implements ActionListener, KeyListener{
 			}
 
 		});
-		timer.start();
 
 	}
 
@@ -65,6 +62,19 @@ public class Controller implements ActionListener, KeyListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		switch (Actions.valueOf(e.getActionCommand()))  {
+		case ACCEPT:
+			try {
+				client = new Client(dialogRegsitry.getName(), dialogRegsitry.getIP(),Integer.parseInt(dialogRegsitry.getPas()), this);
+				client.send(ConstatntsUI.INIT_MESSAGE+ client.getName());
+			} catch (HeadlessException | NumberFormatException | IOException e1) {
+				e1.printStackTrace();
+			}
+			timer.start();
+			break;
+		default:
+			break;
+		}
 
 	}
 	public static void main(String[] args) {
