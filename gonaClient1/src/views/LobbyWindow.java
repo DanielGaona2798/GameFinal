@@ -4,13 +4,11 @@ package views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -28,7 +26,6 @@ public class LobbyWindow extends JFrame{
 	private DefaultTableModel model;
 	private JTable tableMan;
 	private JScrollPane scroll;
-	private JButton close;
 	
 	public LobbyWindow(Controller controller) {
 		setLayout(new BorderLayout());
@@ -45,23 +42,12 @@ public class LobbyWindow extends JFrame{
 
 		add(scroll, BorderLayout.CENTER);
 		
-		JPanel pnlLow = new JPanel();
-		pnlLow.setLayout(new GridLayout(1, 2));
 		start = new JButton("START");
 		start.addActionListener(controller);
 		start.setBackground(Color.WHITE);
 		start.setForeground(Color.BLUE);
 		start.setActionCommand(Actions.START.toString());
-		pnlLow.add(start);
-		
-		close = new JButton("CLOSE");
-		close.addActionListener(controller);
-		close.setBackground(Color.WHITE);
-		close.setForeground(Color.BLUE);
-		close.setActionCommand(Actions.CLOSE.toString());
-		pnlLow.add(close);
-		
-		add(pnlLow, BorderLayout.SOUTH);
+		add(start, BorderLayout.SOUTH);
 	}
 	
 	public void refreshTable(ArrayList<Player> list) {

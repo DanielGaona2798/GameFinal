@@ -11,6 +11,7 @@ import javax.swing.Timer;
 
 import constants.ConstatntsUI;
 import models.Client;
+import views.DIalogHistoryChannel;
 import views.DialogRegsitry;
 import views.LobbyWindow;
 import views.MainWindow;
@@ -23,12 +24,14 @@ public class Controller implements ActionListener, KeyListener{
 	private Timer timer;
 	private DialogRegsitry dialogRegsitry;
 	private LobbyWindow lobbyWindow;
+	private DIalogHistoryChannel dIalogHistoryChannel;
 	
 	public Controller() {
 		lobbyWindow = new LobbyWindow(this);
 		dialogRegsitry = new DialogRegsitry(this);
-		dialogRegsitry.setVisible(true);
 		mainWindow = new MainWindow(this);
+		dIalogHistoryChannel = new DIalogHistoryChannel(this);
+		dIalogHistoryChannel.setVisible(true);
 		timer = new Timer(10, new ActionListener() {
 
 			@Override
@@ -87,6 +90,12 @@ public class Controller implements ActionListener, KeyListener{
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
+			break;
+		case INIT:
+			dialogRegsitry.setVisible(true);
+			dIalogHistoryChannel.setVisible(false);
+			break;
+		default:
 			break;
 		}
 
