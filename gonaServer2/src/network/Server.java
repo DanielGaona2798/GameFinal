@@ -161,8 +161,9 @@ public class Server {
 		}
 	}
 
-	public static void removeClientConnection(ClientConnections clientConnections2) {
-		clientConnections.remove(clientConnections2);
+	
+	public static void removePLayer(String string) {
+		game.removePLayer(string);
 	}
 
 }

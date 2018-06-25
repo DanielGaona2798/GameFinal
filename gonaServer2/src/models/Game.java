@@ -65,4 +65,13 @@ public class Game extends GameThread{
 		}
 	}
 
+	public void removePLayer(String string) {
+		for (Player player : playerList) {
+			if (player.getName().equals(string)) {
+				playerList.remove(player);
+
+			}
+		}
+	}
+
 }

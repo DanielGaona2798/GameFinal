@@ -83,7 +83,7 @@ public class Controller implements ActionListener, KeyListener{
 			break;
 		case CLOSE:
 			try {
-				client.send(ConstatntsUI.CLOSE);
+				client.send(ConstatntsUI.CLOSE+ client.getName());
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}

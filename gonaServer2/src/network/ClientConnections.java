@@ -32,8 +32,7 @@ public class ClientConnections extends Connection{
 				Server.sendPlayers();
 				break;
 			case ConstatntsUI.CLOSE:
-				Server.removeClientConnection(this);
-				close();
+				Server.removePLayer(path[1]);
 				break;
 			}
 		} catch (IOException e) {
