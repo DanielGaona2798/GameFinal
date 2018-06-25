@@ -5,12 +5,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+import constants.ConstatntsUI;
 import controller.Actions;
 import controller.Controller;
 
@@ -24,7 +26,8 @@ public class DialogRegsitry extends JDialog{
 	public DialogRegsitry(Controller controller) {
 		setLocationRelativeTo(null);
 		setSize(250, 300);
-
+		setTitle(ConstatntsUI.GAMETITLE);
+		setIconImage(new ImageIcon(getClass().getResource("/img/icon.png")).getImage());
 		setLayout(new BorderLayout());
 	
 		JPanel pnlCenter = new JPanel();

@@ -81,7 +81,14 @@ public class Controller implements ActionListener, KeyListener{
 			lobbyWindow.setVisible(false);
 			mainWindow.setVisible(true);
 			break;
-		default:
+		case CLOSE:
+			try {
+				client.send(ConstatntsUI.CLOSE);
+				client.close();
+				System.exit(0);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			break;
 		}
 

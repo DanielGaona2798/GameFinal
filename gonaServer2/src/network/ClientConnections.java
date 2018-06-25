@@ -31,8 +31,8 @@ public class ClientConnections extends Connection{
 				Server.move(path[2],Integer.parseInt(path[1]));
 				Server.sendPlayers();
 				break;
-			case ConstatntsUI.GET_LIST:
-				
+			case ConstatntsUI.CLOSE:
+				close();
 				break;
 			}
 		} catch (IOException e) {
