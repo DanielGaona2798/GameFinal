@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 
-public class Game {
+
+public class Game extends GameThread{
 
 	private static ArrayList<Player> playerList;
 	private static Rectangle finalPoint;
@@ -42,5 +43,26 @@ public class Game {
 	public void addPLayer(Player player){
 		playerList.add(player);
 	}
-	
+
+	@Override
+	public void executeTask() {
+		aiuda();
+		sleep(100);
+	}
+
+	public void aiuda(){
+		for (Iterator<Player> shoot = playerList.iterator(); shoot.hasNext();) {
+			Player rectangle = shoot.next();
+			coalitionWall(rectangle);
+		}
+	}
+	private  void coalitionWall(Player player) {
+		for (Iterator<Wall> shoot = walls.iterator(); shoot.hasNext();) {
+			Wall wall = shoot.next();
+			if (player.getRectangle().intersects(wall.getRecatngle())) {
+				player.moveInitPosition();
+			}
+		}
+	}
+
 }

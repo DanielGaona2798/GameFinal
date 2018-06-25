@@ -28,6 +28,7 @@ public class Server {
 		serverSocket = new ServerSocket(Integer.parseInt(JOptionPane.showInputDialog("Port")));
 		game = new Game();
 		game.createMap();
+		game.start();
 		timer = new Timer(100, new ActionListener() {
 			
 			@Override
@@ -159,4 +160,9 @@ public class Server {
 			}
 		}
 	}
+
+	public static void removeClientConnection(ClientConnections clientConnections2) {
+		clientConnections.remove(clientConnections2);
+	}
+
 }
