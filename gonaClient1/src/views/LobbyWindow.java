@@ -65,6 +65,7 @@ public class LobbyWindow extends JFrame{
 	}
 	
 	public void refreshTable(ArrayList<Player> list) {
+		model.setRowCount(0);
 		for (Player person : list) {
 			model.addRow(new Object[] {person.getName()});
 			tableMan.setModel(model);

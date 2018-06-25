@@ -47,6 +47,7 @@ public class Controller implements ActionListener, KeyListener{
 
 	public void actualizeView(){
 		mainWindow.setView(client.getPlayers(),client.getPoint(),client.getRectangleWall());
+		lobbyWindow.refreshTable(client.getPlayers());
 	}
 
 	@Override
@@ -73,18 +74,16 @@ public class Controller implements ActionListener, KeyListener{
 			} catch (NumberFormatException | IOException e2) {
 				e2.printStackTrace();
 			}
-			lobbyWindow.refreshTable(client.getPlayers());
+			timer.start();
 			lobbyWindow.setVisible(true);
 			break;
 		case START:
-			timer.start();
 			lobbyWindow.setVisible(false);
 			mainWindow.setVisible(true);
 			break;
 		case CLOSE:
 			try {
 				client.send(ConstatntsUI.CLOSE);
-				
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
